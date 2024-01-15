@@ -1,6 +1,7 @@
 import perfil from '../../Imagens/perfil.svg'
 import sacola from '../../Imagens/sacola.svg'
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 
 const ListaComponent = styled.ul
     `
@@ -12,7 +13,7 @@ const ListaComponent = styled.ul
         }
     `
 
-const itensDeNavegacao = [ 'CATEGORIAS', 'MINHA ESTANTE', 'FAVORITOS' ]
+const itensDeNavegacao = [ 'CATEGORIAS', 'ESTANTE', 'FAVORITOS' ]
 const icons = [ perfil, sacola ]
 
 const Lista = ( props ) => {
@@ -20,7 +21,9 @@ const Lista = ( props ) => {
     if (props.type === 'itens') {
         return(
             <ListaComponent>
-                { itensDeNavegacao.map( item => <li><p>{item}</p></li> ) }
+                { itensDeNavegacao.map( item => 
+                    <Link to={`${ item.toLowerCase() }`}><li><p>{item}</p></li></Link> )
+                }
             </ListaComponent>
         )
     }
