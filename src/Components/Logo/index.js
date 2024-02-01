@@ -1,13 +1,12 @@
 import logo from '../../Imagens/logo.svg'
 import styled from 'styled-components'
 
-const LogoComponent = styled.div
-    `
-        display: flex;
-        gap: 10px;
-        font-size: 2em;
-        line-height: .5em;
-    `
+const LogoComponent = styled.div`
+    display: flex;
+    gap: 10px;
+    font-size: 2em;
+    line-height: .5em;
+`
 
 const Logo = () => {
     return(

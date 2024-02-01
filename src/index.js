@@ -1,9 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import App from './App'
 import reportWebVitals from './reportWebVitals'
 import { createGlobalStyle } from 'styled-components'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import Home from './rotas/Home'
+import Favoritos from './rotas/Favoritos'
+import Navegacao from './Components/Navegacao'
+import { PesquisaProvider } from './context/PesquisaContext'
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -14,11 +17,14 @@ const GlobalStyle = createGlobalStyle`
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
-
-  code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-      monospace;
+  li {
+    list-style: none;
   }
+  a {
+    text-decoration: none;
+    color: black;
+  }
+  
 `
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -26,10 +32,13 @@ root.render(
   <React.StrictMode>
     <GlobalStyle />
     <BrowserRouter>
-      <Routes>
-        <Route path='/favoritos' element={<p>Oi!</p>} />
-        <Route path='/' element={<App />} />
-      </Routes>
+      <Navegacao />
+      <PesquisaProvider>
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/favoritos' element={<Favoritos />} />
+        </Routes>
+      </PesquisaProvider>
     </BrowserRouter>
   </React.StrictMode>
 );
