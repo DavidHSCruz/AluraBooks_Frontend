@@ -3,13 +3,15 @@ import Pesquisa  from '../Components/Pesquisa'
 import Carrossel from '../Components/Carrossel'
 import { PesquisaContext } from '../context/PesquisaContext'
 import { useContext } from 'react'
+import FiltroLivros from '../Components/FiltroLivros'
 
 const HomeDivisao = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
   width: 50%;
-  height: auto;
+  margin-top: 85px;
+  height: calc(100% - 85px);
 `
 
 const HomeContainer = styled.section`
@@ -37,7 +39,7 @@ function Home() {
         <Pesquisa />
       </HomeDivisao>
       <HomeDivisao>
-        { texto === false ? <Carrossel /> : <p>Filtro</p> }
+        { texto === '' ? <Carrossel /> : <FiltroLivros textoDigitado={texto}/> }
       </HomeDivisao>
     </HomeContainer>
   );
