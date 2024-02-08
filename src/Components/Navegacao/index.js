@@ -10,6 +10,7 @@ const NavegacaoContainer = styled.header`
     width: 100%;
     justify-content: center;
     padding: 0 4em;
+    z-index: 99;
 `
 
 const Navegacao = () => {

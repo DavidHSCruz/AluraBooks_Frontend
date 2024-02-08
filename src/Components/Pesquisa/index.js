@@ -7,7 +7,7 @@ import { useContext } from "react"
 const PesquisaConteiner = styled.div`
     text-align: center;
     color: #f4f4f4;
-    font-size: 1.5em;
+    font-size: 1.2em;
     @media (max-width: 1024px) {
         padding: 20% 5% 0 5%;
     }

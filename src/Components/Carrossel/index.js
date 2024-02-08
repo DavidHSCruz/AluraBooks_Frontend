@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { useRef, useState, useEffect } from 'react'
-import Card from '../Card'
-import livro from '../../Imagens/livro.png'
+import GeradorDeCards from '../GeradorDeCards'
+
 
 const CarrosselContainer = styled.div`
     position: relative;
@@ -9,10 +9,8 @@ const CarrosselContainer = styled.div`
     width: max(80%, 200px);
 `
 
-const LivrosContainer = styled.div.attrs({
-    style:{width: `${prop => prop.size}`}
-})`
-    grid-auto-columns: calc(100% / ${prop => prop.quantidadeDeLivrosNoCarrossel} - 48px);
+const LivrosContainer = styled.div`
+    grid-auto-columns: calc(100% / ${props => props.quantidadeDeLivrosNoCarrossel} - 48px);
     display: grid;
     grid-auto-flow: column;
     gap: 50px;
@@ -58,31 +56,28 @@ const SetaComponent = styled.i`
     }
 `
 
-const Carrossel = () => {
+const Carrossel = ({ tipo }) => {
     const carrossel = useRef(null)
     let isDragging = false, startX, startScrollLeft
     const [carrosselSize, setCarrosselSize] = useState('')
-    useEffect( () => windowSize('size'), [])
-    useEffect( () => windowSize('resize'), [carrosselSize])
+    const [ cardWidth, setCardWidth ] = useState(191)
+
+    useEffect( () => { if (carrossel.current)  windowSize('size') }, [])
+    useEffect( () => { if (carrossel.current)  windowSize('resize') }, [carrosselSize])
 
     function windowSize(x) {
-        if (x === 'size') {
-            if (carrossel.current) HiddenSeta()
-            return windowSizeTest()
-        }
-        if (x === 'resize') {
-            window.addEventListener('resize', () => {
-                if (carrossel.current) HiddenSeta()
-                return windowSizeTest()
-            })
+        if (x === 'size')   { windowSizeTest() }
+        if (x === 'resize') { window.addEventListener('resize', () => { windowSizeTest() })
         }
     }
     function windowSizeTest() {
         if (carrossel.current) {
             const size = carrossel.current.offsetWidth
-            const cardWidth = document.querySelector('.card').offsetWidth + 15
-
-            return setCarrosselSize(Math.floor( size / cardWidth ))
+            setCarrosselSize(Math.floor( size / cardWidth ))
+            setTimeout(() => {
+                setCardWidth(document.querySelector('.card').offsetWidth)
+                HiddenSeta()
+            }, 200)
         }
     }
     function draggingStart(e) {
@@ -103,8 +98,7 @@ const Carrossel = () => {
     }
     function clickSeta() {
         const arrows = document.querySelectorAll('.seta')
-        const cardWidth = document.querySelector('.card').offsetWidth
-
+    
         arrows.forEach( arrow => {
             const side = arrow.getAttribute('side')
             arrow.addEventListener('click', () => {
@@ -114,6 +108,7 @@ const Carrossel = () => {
     }
     function HiddenSeta() {
         const arrows = document.querySelectorAll('.seta')
+
         if (carrossel.current.scrollLeft <= 0 && carrossel.current.offsetWidth === carrossel.current.scrollWidth) {
             arrows.forEach( arrow => arrow.style.display = 'none')
         } else {
@@ -123,22 +118,24 @@ const Carrossel = () => {
     
     return(
         <CarrosselContainer>
-            <SetaComponent className='seta' onClick={clickSeta} side='left'>&#60;</SetaComponent>
-            <SetaComponent className='seta' onClick={clickSeta} side='right'>&#62;</SetaComponent>
+            <SetaComponent 
+                className='seta' 
+                onClick={clickSeta} 
+                side='left'>&#60;
+            </SetaComponent>
+            <SetaComponent 
+                className='seta' 
+                onClick={clickSeta} 
+                side='right'>&#62;
+            </SetaComponent>
             <LivrosContainer
-                size='100%'
                 ref={carrossel}
                 onMouseMove={dragging} 
                 onMouseDown={draggingStart} 
                 onMouseUp={draggingStop}
                 quantidadeDeLivrosNoCarrossel={carrosselSize}
             >
-                <Card imgLivro={livro} />
-                <Card imgLivro={livro} />
-                <Card imgLivro={livro} />
-                <Card imgLivro={livro} />
-                <Card imgLivro={livro} />
-                <Card imgLivro={livro} />
+                <GeradorDeCards tipo={tipo}/>
             </LivrosContainer>
         </CarrosselContainer>
     )

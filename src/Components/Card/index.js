@@ -3,16 +3,15 @@ import styled from 'styled-components'
 const CardDescricao = styled.div`
     position: relative;
     color: #f4f4f4;
-    padding: 5px 15px;
-    line-height: 0;
+    padding: 5px;
     bottom: -25%;
     width: 100%;
     height: 20%;
     background-color: #00002099;
+    overflow: hidden;
     transition: 500ms ease-in-out 250ms;
-    > p {
-        line-height: .2em;
-        font-size: .8em;
+    > h5 {
+        margin-top: -1px;
     }
 `
 
@@ -23,22 +22,23 @@ const CardContainer = styled.div`
     width: 191px;
     height: 263px;
     background-size: 100%;
-    background-image: url(${props => props.imgLivro});
+    background-image: url(${props => props.img});
     background-size: cover;
     background-position: center;
     overflow: hidden;
-    scroll-snap-align: center;
+    scroll-snap-align: start;
     &:hover ${CardDescricao} {
         bottom: 0;
     }
 `
 
-const Card = (props) => {
+const Card = ({ imgLivro, titulo }) => {
+
+
     return(
-        <CardContainer className='card' imgLivro={props.imgLivro} draggable='false'>
+        <CardContainer className='card' img={imgLivro} draggable='false'>
             <CardDescricao>
-                <h3>Título</h3>
-                <p>Autor</p>
+                <h5>{titulo}</h5>
             </CardDescricao>
         </CardContainer>
     )

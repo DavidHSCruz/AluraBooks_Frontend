@@ -3,7 +3,7 @@ import Pesquisa  from '../Components/Pesquisa'
 import Carrossel from '../Components/Carrossel'
 import { PesquisaContext } from '../context/PesquisaContext'
 import { useContext } from 'react'
-import FiltroLivros from '../Components/FiltroLivros'
+import GeradorDeLista from '../Components/GeradorDeLista'
 
 const HomeDivisao = styled.div`
   display: flex;
@@ -15,16 +15,15 @@ const HomeDivisao = styled.div`
 `
 
 const HomeContainer = styled.section`
-  width: 100%;
   height: 100vh;
   display: flex;
   align-items: center;
-  background: linear-gradient(90deg, #002F52 35%, #326589);
   @media (max-width: 1024px) {
         display: block;
         & ${HomeDivisao} {
           width: 100%;
           height: 50%;
+          margin-top: 0;
         }
     }
 `
@@ -39,7 +38,7 @@ function Home() {
         <Pesquisa />
       </HomeDivisao>
       <HomeDivisao>
-        { texto === '' ? <Carrossel /> : <FiltroLivros textoDigitado={texto}/> }
+        { texto === '' ? <Carrossel tipo='destaques'/> : <GeradorDeLista textoDigitado={texto}/> }
       </HomeDivisao>
     </HomeContainer>
   );
