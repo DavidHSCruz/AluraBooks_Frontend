@@ -5,7 +5,7 @@ const AppContainer = styled.div`
   padding-top: 85px;
 `
 
-function Estante() {
+function Categorias() {
   return (
     <AppContainer>
       <Flex />
@@ -13,4 +13,4 @@ function Estante() {
   );
 }
 
-export default Estante
+export default Categorias

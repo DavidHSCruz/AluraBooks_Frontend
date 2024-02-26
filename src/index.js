@@ -3,11 +3,14 @@ import ReactDOM from 'react-dom/client'
 import reportWebVitals from './reportWebVitals'
 import { createGlobalStyle } from 'styled-components'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import Home from './rotas/Home'
-import Favoritos from './rotas/Favoritos'
 import Navegacao from './Components/Navegacao'
-import { PesquisaProvider } from './context/PesquisaContext'
+import Home from './rotas/Home'
+import Categorias from './rotas/Categorias'
+import Favoritos from './rotas/Favoritos'
 import Estante from './rotas/Estante'
+import Sacola from './rotas/Sacola'
+import { PesquisaProvider } from './context/PesquisaContext'
+import Login from './rotas/Login'
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -47,8 +50,11 @@ root.render(
       <PesquisaProvider>
           <Routes>
             <Route path='/' element={<Home />} />
+            <Route path='/categorias' element={<Categorias />} />
             <Route path='/favoritos' element={<Favoritos />} />
             <Route path='/estante' element={<Estante />} />
+            <Route path='/login' element={<Login />} />
+            <Route path='/sacola' element={<Sacola />} />
           </Routes>
       </PesquisaProvider>
     </BrowserRouter>

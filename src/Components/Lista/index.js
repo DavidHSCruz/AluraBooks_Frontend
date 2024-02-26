@@ -13,6 +13,7 @@ const ListaComponent = styled.ul`
 `
 
 const itensDeNavegacao = [ 'CATEGORIAS', 'ESTANTE', 'FAVORITOS' ]
+const iconsDeNavegacao = [ 'LOGIN', 'SACOLA' ]
 const icons = [ perfil, sacola ]
 
 const Lista = ( props ) => {
@@ -20,16 +21,18 @@ const Lista = ( props ) => {
     if (props.type === 'itens') {
         return(
             <ListaComponent>
-                { itensDeNavegacao.map( item => 
-                    <Link to={`${ item.toLowerCase() }`}><li><p>{item}</p></li></Link> 
-                )}
+                { 
+                    itensDeNavegacao.map( item => <Link to={`${ item.toLowerCase() }`}><li><p>{item}</p></li></Link> )
+                }
             </ListaComponent>
         )
     }
     if (props.type === 'icons') {
         return(
             <ListaComponent>
-                { icons.map( icon => <li><img src={icon} alt={icon} /></li> ) }
+                {
+                    iconsDeNavegacao.map( item => <Link to={`${ item.toLowerCase() }`}>{item === 'LOGIN' ? <li><img src={icons[0]} alt={item} /></li> : <li><img src={icons[1]} alt={item} /></li> }</Link> )
+                }
             </ListaComponent>
         )
     }
