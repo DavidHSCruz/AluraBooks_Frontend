@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import CardLista from '../Components/CardLista'
 import livroPNG from '../Imagens/livro.png'
 import { useState, useEffect } from 'react'
-import { getFavoritos } from '../Servicos/Favoritos'
+import { deleteFavoritos, getFavoritos } from '../Servicos/Favoritos'
 
 const AppContainer = styled.div`
   margin: auto;
@@ -33,11 +33,18 @@ function Favoritos() {
       setFavoritosPesquisados(favoritosAPI)
     }
 
+    async function deleteFavorito(id) {
+      await deleteFavoritos(id)
+      await fetchLivros()
+      alert(`livro de id:${id} deletado`)
+    }
+
   return (
     <AppContainer>
       {
         favoritosPesquisados.map( livro => (
-          <CardLista  key={livro.id}
+          <CardLista  click={ () => deleteFavorito(livro.id) }
+                      key={livro.id}
                       livroPNG={livroPNG}
                       titulo={livro.titulo}
                       autor={livro.autor}

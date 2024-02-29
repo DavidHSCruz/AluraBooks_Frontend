@@ -4,6 +4,7 @@ import { getLivros } from "../../Servicos/Livros"
 import Fuse from 'fuse.js'
 import livroPNG from '../../Imagens/livro.png'
 import CardLista from "../CardLista"
+import { postFavoritos } from "../../Servicos/Favoritos"
 
 const ListaContainer = styled.section`
     width: 80%;
@@ -39,12 +40,17 @@ const GeradorDeLista = ({ textoDigitado }) => {
         setLivrosPesquisados(resultadoPesquisa)
     }
 
+    async function insertFavorito(id) {
+        await postFavoritos(id)
+        alert(`livro de id:${id} inserido`)
+    }
 
     return(
         <ListaContainer key='lista'>
             { 
                 livrosPesquisados.map(livro => (
-                    <CardLista  key={livro.item.id}
+                    <CardLista  click={ () => insertFavorito(livro.item.id) }
+                                key={livro.item.id}
                                 livroPNG={livroPNG}
                                 titulo={livro.item.titulo}
                                 autor={livro.item.autor}

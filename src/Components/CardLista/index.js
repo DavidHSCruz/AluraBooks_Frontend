@@ -7,6 +7,7 @@ const CardComponent = styled.div`
     margin-bottom: 5px;
     width: 100%;
     color: #f4f4f4;
+    cursor: pointer;
     >img {
         width: 8em;
     }
@@ -25,11 +26,11 @@ const CardDescricao = styled.div`
     }
 `
 
-const CardLista = ({ livroPNG, titulo, autor, altIMG, ano, linguagem, categoria }) => {
+const CardLista = ({ livroPNG, titulo, autor, altIMG, ano, linguagem, categoria, click }) => {
 
 
     return(
-        <CardComponent>
+        <CardComponent onClick={click}>
             <img src={livroPNG} alt={altIMG} />
             <CardDescricao>
                 <h3>{titulo}</h3>
