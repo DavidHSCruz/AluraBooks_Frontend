@@ -1,6 +1,6 @@
 import axios from "axios"
 
-const registrosAPI = axios.create({ baseURL: 'http://localhost:8000/login' })
+const registrosAPI = axios.create({ baseURL: 'https://alura-books-backend.vercel.app/login' })
 
 async function getDestaques()  {
     const response = await registrosAPI.get('/')

@@ -1,6 +1,6 @@
 import axios from "axios"
 
-const livrosAPI = axios.create({ baseURL: 'http://localhost:8000/sacola' })
+const livrosAPI = axios.create({ baseURL: 'https://alura-books-backend.vercel.app/sacola' })
 
 async function getSacola()  {
     const response = await livrosAPI.get('/')
