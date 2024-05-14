@@ -1,6 +1,6 @@
 import axios from "axios"
 
-const favoritosAPI = axios.create({ baseURL: 'https://alura-books-backend.vercel.app/favoritos' })
+const favoritosAPI = axios.create({ baseURL: 'https://alurabooks-backend.onrender.com/favoritos' })
 
 async function getFavoritos()  {
     const response = await favoritosAPI.get('/')
