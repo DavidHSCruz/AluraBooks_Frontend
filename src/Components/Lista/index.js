@@ -22,7 +22,7 @@ const Lista = ( props ) => {
         return(
             <ListaComponent>
                 { 
-                    itensDeNavegacao.map( item => <Link to={`${ item.toLowerCase() }`}><li><p>{item}</p></li></Link> )
+                    itensDeNavegacao.map( (item, i) => <Link key={i} to={`${ item.toLowerCase() }`}><li><p>{item}</p></li></Link> )
                 }
             </ListaComponent>
         )
@@ -31,7 +31,7 @@ const Lista = ( props ) => {
         return(
             <ListaComponent>
                 {
-                    iconsDeNavegacao.map( item => <Link to={`${ item.toLowerCase() }`}>{item === 'LOGIN' ? <li><img src={icons[0]} alt={item} /></li> : <li><img src={icons[1]} alt={item} /></li> }</Link> )
+                    iconsDeNavegacao.map( (item, i) => <Link key={i} to={`${ item.toLowerCase() }`}>{item === 'LOGIN' ? <li><img src={icons[0]} alt={item} /></li> : <li><img src={icons[1]} alt={item} /></li> }</Link> )
                 }
             </ListaComponent>
         )

@@ -14,7 +14,9 @@ const FlexContainer = styled.section`
 const Flex = ({ tipo }) => {
     return(
         <FlexContainer>
-            <GeradorDeCards tipo={tipo}/>
+            <GeradorDeCards 
+                tipo={tipo}
+            />
         </FlexContainer>
         
     )

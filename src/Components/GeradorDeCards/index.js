@@ -5,11 +5,16 @@ import { getFavoritos } from '../../Servicos/Favoritos'
 import { getLivros } from '../../Servicos/Livros'
 import { getDestaques } from '../../Servicos/Destaques'
 
-const GeradorDeCards = ({ tipo }) => {
+const GeradorDeCards = ({ 
+    carrosselRef, 
+    tipo, 
+    setCardWidth, 
+    carrosselSize 
+}) => {
     const [ livrosPesquisados, setLivrosPesquisados ] = useState([])
     const [ favoritosPesquisados, setFavoritosPesquisados ] = useState([])
     const [ destaquesPesquisados, setDestaquesPesquisados ] = useState([])
-    
+
     async function fetchLivros() {
         const livrosAPI    = await getLivros()
         const favoritosAPI = await getFavoritos()
@@ -33,6 +38,9 @@ const GeradorDeCards = ({ tipo }) => {
                                 autor={livro.autor}
                                 imgLivro={livroPNG}
                                 key={livro.id}
+                                carrosselRef={carrosselRef}
+                                setCardWidth={setCardWidth}
+                                carrosselSize={carrosselSize}
                             />
                         )
                     )}
@@ -48,6 +56,9 @@ const GeradorDeCards = ({ tipo }) => {
                                 autor={livro.autor}
                                 imgLivro={livroPNG}
                                 key={livro.id}
+                                carrosselRef={carrosselRef}
+                                setCardWidth={setCardWidth}
+                                carrosselSize={carrosselSize}
                             />
                         )
                     )}
@@ -63,6 +74,9 @@ const GeradorDeCards = ({ tipo }) => {
                                 autor={livro.autor}
                                 imgLivro={livroPNG}
                                 key={livro.id}
+                                carrosselRef={carrosselRef}
+                                setCardWidth={setCardWidth}
+                                carrosselSize={carrosselSize}
                             />
                         )
                     )}

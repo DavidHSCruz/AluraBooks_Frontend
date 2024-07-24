@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react'
 import styled from 'styled-components'
 
 const CardDescricao = styled.div`
@@ -32,11 +33,28 @@ const CardContainer = styled.div`
     }
 `
 
-const Card = ({ imgLivro, titulo }) => {
+const Card = ({ imgLivro, titulo, carrosselRef, setCardWidth, carrosselSize }) => {
+    const cardRef = useRef(null)
 
+    useEffect( () => {
+        const carrossel = carrosselRef
+        const card = cardRef.current
+
+        function windowSize(x = 'size') {
+            if (x === 'size') windowSizeTest()
+            if (x === 'resize') window.addEventListener('resize', () => { windowSizeTest() })
+        }
+        function windowSizeTest() {
+            setCardWidth(card.offsetWidth)
+        }
+        if(setCardWidth) windowSize()
+
+        if (carrossel)  windowSize('resize')
+
+    }, [carrosselSize])
 
     return(
-        <CardContainer className='card' img={imgLivro} draggable='false'>
+        <CardContainer ref={cardRef} className='card' img={imgLivro} draggable='false'>
             <CardDescricao>
                 <h5>{titulo}</h5>
             </CardDescricao>
