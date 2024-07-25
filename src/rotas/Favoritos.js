@@ -36,7 +36,7 @@ function Favoritos() {
     async function deleteFavorito(id) {
       await deleteFavoritos(id)
       await fetchLivros()
-      alert(`livro de id:${id} deletado`)
+      alert(`livro ${id} deletado`)
     }
 
   return (
@@ -45,6 +45,7 @@ function Favoritos() {
         favoritosPesquisados.map( livro => (
           <CardLista  click={ () => deleteFavorito(livro.id) }
                       key={livro.id}
+                      id={livro.id}
                       livroPNG={livroPNG}
                       titulo={livro.titulo}
                       autor={livro.autor}
@@ -52,6 +53,7 @@ function Favoritos() {
                       ano={livro.ano_publicacao}
                       linguagem={livro.linguagem}
                       categoria={livro.categoria}
+                      favoritos={favoritosPesquisados}
           />
         ))
       }

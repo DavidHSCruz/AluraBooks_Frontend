@@ -4,7 +4,7 @@ import { getLivros } from "../../Servicos/Livros"
 import Fuse from 'fuse.js'
 import livroPNG from '../../Imagens/livro.png'
 import CardLista from "../CardLista"
-import { postFavoritos } from "../../Servicos/Favoritos"
+import { deleteFavoritos, getFavoritos, postFavoritos } from "../../Servicos/Favoritos"
 
 const ListaContainer = styled.section`
     width: 80%;
@@ -23,14 +23,16 @@ const ListaContainer = styled.section`
 
 const GeradorDeLista = ({ textoDigitado }) => {
     const [ livrosPesquisados, setLivrosPesquisados ] = useState([])
+    const [ favoritosPesquisados, setFavoritosPesquisados ] = useState([])
     
     const opcoesPesquisa = {
-        keys: ['nome', 'autor'],
+        keys: ['titulo', 'autor'],
         includesScore: true,
         threshold: 0.4
     }
     useEffect(() => {
         fetchLivros(textoDigitado)
+        fetchFavoritos()
     }, [textoDigitado])
 
     async function fetchLivros(textoDigitado) {
@@ -40,21 +42,42 @@ const GeradorDeLista = ({ textoDigitado }) => {
         setLivrosPesquisados(resultadoPesquisa)
     }
 
+    async function fetchFavoritos() {
+        const favoritosAPI = await getFavoritos()
+        setFavoritosPesquisados(favoritosAPI)
+      }
+
     async function insertFavorito(id) {
         await postFavoritos(id)
-        alert(`livro de id:${id} inserido`)
+        await fetchFavoritos()
+    }
+
+    async function deleteFavorito(id) {
+        await deleteFavoritos(id)
+        await fetchFavoritos()
+    }
+
+    function livroFavoritado(id) {
+        const favorito = favoritosPesquisados.some((livro) => livro.id === id)
+        if(!favorito) {
+            insertFavorito(id)
+        } else {
+            deleteFavorito(id)
+        }
     }
 
     return(
         <ListaContainer key='lista'>
             { 
                 livrosPesquisados.map(livro => (
-                    <CardLista  click={ () => insertFavorito(livro.item.id) }
+                    <CardLista  click={ () => livroFavoritado(livro.item.id) }
                                 key={livro.item.id}
+                                id={livro.item.id}
                                 livroPNG={livroPNG}
                                 titulo={livro.item.titulo}
                                 autor={livro.item.autor}
                                 altIMG="Capa do livro"
+                                favoritos={favoritosPesquisados}
                     />
                 ))
             }
