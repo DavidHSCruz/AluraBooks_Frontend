@@ -51,7 +51,7 @@ root.render(
           <Routes>
             <Route path='/' element={<Home />} />
             <Route path='/categorias' element={<Categorias />} />
-            <Route path='/favoritos' element={<Favoritos />} />
+            <Route path='/listadedesejos' element={<Favoritos />} />
             <Route path='/estante' element={<Estante />} />
             <Route path='/login' element={<Login />} />
             <Route path='/sacola' element={<Sacola />} />

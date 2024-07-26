@@ -1,5 +1,6 @@
 import perfil from '../../Imagens/perfil.svg'
 import sacola from '../../Imagens/sacola.svg'
+import { IoBagHandleOutline, IoBagHandleSharp } from "react-icons/io5"
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 
@@ -9,10 +10,15 @@ const ListaComponent = styled.ul`
     align-items: center;
     li {
         cursor: pointer;
+        svg {
+            width: 32px;
+            height: 32px;
+            color: #025;
+        }
     }
 `
 
-const itensDeNavegacao = [ 'CATEGORIAS', 'ESTANTE', 'FAVORITOS' ]
+const itensDeNavegacao = [ 'ESTANTE', 'LISTA DE DESEJOS' ]
 const iconsDeNavegacao = [ 'LOGIN', 'SACOLA' ]
 const icons = [ perfil, sacola ]
 
@@ -22,7 +28,7 @@ const Lista = ( props ) => {
         return(
             <ListaComponent>
                 { 
-                    itensDeNavegacao.map( (item, i) => <Link key={i} to={`${ item.toLowerCase() }`}><li><p>{item}</p></li></Link> )
+                    itensDeNavegacao.map( (item, i) => <Link key={i} to={`${ item.toLowerCase().replace(/\s+/g, '') }`}><li><p>{item}</p></li></Link> )
                 }
             </ListaComponent>
         )
@@ -31,7 +37,7 @@ const Lista = ( props ) => {
         return(
             <ListaComponent>
                 {
-                    iconsDeNavegacao.map( (item, i) => <Link key={i} to={`${ item.toLowerCase() }`}>{item === 'LOGIN' ? <li><img src={icons[0]} alt={item} /></li> : <li><img src={icons[1]} alt={item} /></li> }</Link> )
+                    iconsDeNavegacao.map( (item, i) => <Link key={i} to={`${ item.toLowerCase() }`}>{item === 'LOGIN' ? <li><img src={icons[0]} alt={item} /></li> : <li><IoBagHandleOutline /></li> }</Link> )
                 }
             </ListaComponent>
         )

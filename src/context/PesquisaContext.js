@@ -1,6 +1,6 @@
-import { createContext, useState } from "react"
+import { createContext, useState, useContext } from "react"
 
-export const PesquisaContext = createContext()
+const PesquisaContext = createContext()
 
 export const PesquisaProvider = ({children}) => {
 
@@ -12,3 +12,5 @@ export const PesquisaProvider = ({children}) => {
         </PesquisaContext.Provider>
     )
 }
+
+export const usePesquisaValue = () => useContext(PesquisaContext)

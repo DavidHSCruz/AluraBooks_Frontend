@@ -1,8 +1,8 @@
 import styled from 'styled-components'
+import { useEffect } from 'react'
+import { usePesquisaValue } from '../context/PesquisaContext'
 import Pesquisa  from '../Components/Pesquisa'
 import Carrossel from '../Components/Carrossel'
-import { PesquisaContext } from '../context/PesquisaContext'
-import { useContext } from 'react'
 import GeradorDeLista from '../Components/GeradorDeLista'
 
 const HomeDivisao = styled.div`
@@ -30,7 +30,12 @@ const HomeContainer = styled.section`
 
 function Home() {
 
-  const { texto } = useContext(PesquisaContext)
+  const { texto, setTexto } = usePesquisaValue()
+
+  useEffect(() => {
+    setTexto('')
+  }, [])
+
 
   return (
     <HomeContainer>

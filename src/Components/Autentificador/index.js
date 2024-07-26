@@ -72,7 +72,7 @@ const Autentificador = () => {
 const Login = ({ pag }) => {
     if (pag === 'LOGIN') {
         return(
-            <form>
+            <form onSubmit={ e => e.preventDefault() }>
                 <label>
                     <h5>Usuário:</h5>
                     <Input type='text'/>
@@ -81,12 +81,12 @@ const Login = ({ pag }) => {
                     <h5>Senha:</h5>
                     <Input type='password'/>
                 </label>
-                <Button onClick={ e => e.preventDefault() }>ENTRAR</Button>
+                <Button>ENTRAR</Button>
             </form>
         )
     }else {
         return(
-            <form>
+            <form onSubmit={ e => e.preventDefault() }>
                 <label>
                     <h5>Usuário:</h5>
                     <Input type='text'/>
@@ -103,7 +103,7 @@ const Login = ({ pag }) => {
                     <h5>Confirme a senha:</h5>
                     <Input type='password'/>
                 </label>
-                <Button onClick={ e => e.preventDefault() }>CADASTRAR</Button>
+                <Button>CADASTRAR</Button>
             </form>
         )
     }

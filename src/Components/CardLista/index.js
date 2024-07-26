@@ -43,8 +43,8 @@ const Button = styled.button`
 const CardLista = ({ id, livroPNG, titulo, autor, altIMG, ano, linguagem, categoria, click, favoritos }) => {
 
     function livroFavoritado() {
-        const favorito = favoritos.filter((livro) => livro.id === id)
-        if(favorito[0]) {
+        const favorito = favoritos.some((livro) => livro.id === id)
+        if(favorito) {
             return <Button onClick={click}><GoHeartFill /></Button>
         } else {
             return <Button onClick={click}><GoHeart /></Button>

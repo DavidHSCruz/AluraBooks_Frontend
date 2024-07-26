@@ -1,8 +1,7 @@
 import styled from "styled-components"
 import { Titulo, Subtitulo } from "../Titulo"
 import Input from "../Input"
-import { PesquisaContext } from "../../context/PesquisaContext"
-import { useContext } from "react"
+import { usePesquisaValue } from "../../context/PesquisaContext"
 
 const PesquisaContainer = styled.div`
     text-align: center;
@@ -14,14 +13,14 @@ const PesquisaContainer = styled.div`
 `
 
 const Pesquisa = () => {
-    const { setTexto } = useContext(PesquisaContext)
+    const { setTexto } = usePesquisaValue()
 
     return(
         <PesquisaContainer>
             <Titulo>Já sabe por onde começar?</Titulo>
             <Subtitulo>Que tal buscar por livros na nossa estante?</Subtitulo>
             <Input  placeholder='Exemplo: busque por javascript...'
-                    onInput={ evento => setTexto(evento.target.value) }
+                    onInput={ e => setTexto(e.target.value) }
             />
         </PesquisaContainer>
     )
